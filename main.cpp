@@ -82,3 +82,17 @@ void add_goat(list<Goat> &trip, string names[], string colors[]) {
          << g.get_age()
          << g.get_color() << endl;
 }
+
+int select_goat(list<Goat> trip) {
+    if (trip.empty()) {
+        return -1;
+    }
+
+    display_trip(trip);
+
+    int choice;
+    cout << "\nSelect a goat by number: ";
+    cin >> choice;
+
+    return choice;
+}
