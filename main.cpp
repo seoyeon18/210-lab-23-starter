@@ -35,3 +35,35 @@ int main() {
     return 0;
 }
 
+int main_menu() {
+    int choice;
+
+    cout << "\n===== GOAT MENU =====\n";
+    cout << "1. Add Goat\n";
+    cout << "2. Delete Goat\n";
+    cout << "3. Display Trip\n";
+    cout << "4. Quit\n";
+    cout << "Enter your choce";
+    cin >> choice;
+
+    return choice;
+}
+
+void display_trip(list<Goat> trip) {
+    if (trip.empty()) {
+        cout << "\nThere are no goat in the trip\n";
+        return;
+    }
+
+    cout << "\n===== GOAT TRIP =====\n";
+    int count = 1;
+
+    for (Goat g : trip) {
+        cout << count << ". "
+             << left << setw(12) << g.get_name()
+             << setw(8) << g.get_age()
+             << g.get_color() << endl;
+        count++;
+    }
+}
+
