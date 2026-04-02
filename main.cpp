@@ -23,17 +23,43 @@ int main() {
     int i = 0;
     while (fin >> names[i++]);
     fin.close();
+
     ifstream fin1("colors.txt");
     string colors[SZ_COLORS];
     i = 0;
     while (fin1 >> colors[i++]);
     fin1.close();
 
+    list<Goat> trip;
+    again = true;
 
+    while (again) {
+        int choice = main_menu();
 
+        switch (choice) {
+            case 1:
+                add_goat(trip, names, colors);
+                break;
+            case 2:
+                delete_goat(trip);
+                break;
+            case 3:
+                display_trip(trip);
+                break;
+            case 4:
+                again = false;
+                cout << "\nGoodbye!\n";
+                break;
+            default:
+                cout << "\nInvalid choice. Try again.\n";
+        }
+    }
 
     return 0;
 }
+
+
+
 
 int main_menu() {
     int choice;
@@ -95,4 +121,29 @@ int select_goat(list<Goat> trip) {
     cin >> choice;
 
     return choice;
+}
+
+
+void delete_goat(list<Goat> &trip) {
+    if (trip.empty()) {
+        cout << "There are no goats to delete";
+        return;
+    }
+
+    int choice = select_goat(trip);
+
+    if (choice < 1 || choice > trip.size()) {
+        cout << "Invalid selection";
+        return;
+    }
+
+    auto it = trip.begin();
+    advance(it, choice - 1);
+
+    cout << "\nDeleted goat:\n";
+    cout << it->get_name() 
+         << it->get_age() 
+         << it->get_color() << endl;
+
+    trip.erase(it);
 }
